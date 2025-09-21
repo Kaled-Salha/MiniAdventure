@@ -10,6 +10,8 @@
 
         static void Main(string[] args)
         {
+            
+
             Console.WriteLine("Welcome, hero. What is your name?");
             
             string playerName = Console.ReadLine();
@@ -180,6 +182,15 @@
                 }
 
                 Console.ReadKey();
+
+
+                Console.Clear();
+                Console.WriteLine("--- Made by ---");
+                Console.WriteLine("╔═════════════════════╗");
+                Console.WriteLine("║===  HEXE_MORTEM  ===║");
+                Console.WriteLine("╚═════════════════════╝");
+
+
             }
         }
 
