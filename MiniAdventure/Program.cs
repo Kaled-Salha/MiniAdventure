@@ -69,6 +69,8 @@
 
             bool gameRunning = true;
             bool firstTime = true;
+            Random rnd = new Random();
+
             while (gameRunning)
             {
                 Console.Clear();
@@ -88,14 +90,74 @@
                 Console.WriteLine("[5]. Exit the game.");
 
 
-                int choice = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter your choice: ");
+                string input = Console.ReadLine();
+
+                bool validInput = int.TryParse(input, out int choice);
+                if (!validInput || choice <1 || choice > 5) 
+                {
+                    Console.WriteLine("Invalid option. Please enter a number between 1 and 5");
+                    Console.ReadKey();
+                    continue;
+
+                }
 
 
                 switch (choice)
                 {
 
                     case 1:
-                        Console.WriteLine($"You encountered 2 {"Goblin"}s");
+
+                        
+                        Enemy template = enemies[rnd.Next(enemies.Count)];
+                        Enemy enemy = new Enemy(template.Name, template.HP, template.Damage, template.GoldReward);
+
+
+                        Console.WriteLine($"You encountered a {enemy.Name}");
+                        Console.WriteLine($"HP: {enemy.HP}, Damage: {enemy.Damage}, Gold: {enemy.GoldReward}");
+
+                        while (enemy.HP > 0 && player.HP > 0)
+                        {
+                            Console.WriteLine("What do you want to do?");
+                            Console.WriteLine("[1]. Fight?");
+                            Console.WriteLine("[2]. Run?");
+
+                            string decision = Console.ReadLine();
+
+                            if (decision == "1")
+                            {
+                                player.Attack();
+                                enemy.HP -= player.Damage;
+                                Console.WriteLine($"You dealt {player.Damage} damage to the {enemy.Name}!");
+                                if (enemy.HP > 0)
+                                {
+                                    player.GetAttacked(enemy.Damage);
+                                    if (player.HP <= 0)
+                                    {
+                                        Console.WriteLine("You died.... GAME OVER!");
+                                        Console.ReadKey();
+                                        gameRunning = false;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"You defeated the {enemy.Name} and gained {enemy.GoldReward} gold!");
+                                    player.Gold += enemy.GoldReward;
+                                }
+                            }
+                            else if (decision == "2")
+                            {
+                                player.RunAway();
+                                break;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please type 1 or 2.");
+                            }
+
+                        }
                         break;
 
                     case 2:
