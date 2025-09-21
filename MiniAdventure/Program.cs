@@ -163,7 +163,7 @@
                         break;
 
                     case 2:
-                        Console.WriteLine("You found a village full with residents!");
+                        Console.WriteLine("You found a village full with residents and lived happily ever after!");
                         break;
 
                     case 3:
