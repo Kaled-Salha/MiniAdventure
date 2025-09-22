@@ -164,6 +164,7 @@
 
                     case 2:
                         Console.WriteLine("You found a village full with residents and lived happily ever after!");
+                        gameRunning = false;
                         break;
 
                     case 3:
@@ -185,6 +186,9 @@
 
 
                 Console.Clear();
+                Console.WriteLine("============ Game Over ============");
+                Console.WriteLine("");
+                Console.WriteLine("");
                 Console.WriteLine("--- Made by ---");
                 Console.WriteLine("╔═════════════════════╗");
                 Console.WriteLine("║===  HEXE_MORTEM  ===║");
